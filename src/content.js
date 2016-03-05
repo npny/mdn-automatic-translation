@@ -12,8 +12,38 @@ function start() {
 
 	addButton();
 
+	addTagsButton();
 }
 
+// Add button to quickly move the tags
+function addTagsButton(){
+	// Query the tags list and the new tag's input
+	var existingTags = document.querySelectorAll('#translate-tags li');
+	var newTagInput = document.querySelector('li.tagit-new input');
+
+	Array.prototype.forEach.call(existingTags, (tag) => {
+
+		// Create a new link for each existing tag
+		// Clicking on the link will update the input field with the curent value
+		((tagElement) => {
+
+			var arrowElement = document.createElement('a');
+			arrowElement.innerText = '▷';
+			arrowElement.href = '#';
+
+			arrowElement.addEventListener("click", (e) => {
+				e.preventDefault();
+
+				newTagInput.value = tag.querySelector('a').innerText;
+				newTagInput.focus(); // just press enter to validate
+			});
+
+			tagElement.appendChild(arrowElement);
+
+		})(tag)
+
+	});
+}
 
 function addButton() {
 
@@ -37,7 +67,7 @@ function runTranslation() {
 
 		// If no selector is specified, run on the entire text
 		const elements = root.querySelectorAll(rule.selector || "body");
-		if(!elements.length) return; 
+		if(!elements.length) return;
 
 		// Check that we have a translation. No point in matching a pattern if we're not able to translate it in the end
 		const translation = rule.translation[locale];
