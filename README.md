@@ -74,7 +74,7 @@ The beauty of the thing is that no matter the language you work with, if you can
 
 ### Move your tags quickly
 
-You can click on the ▷ symbole to move the current text to the new tag input. You can press enter or simply move another tag to move to add automaticly the first one.
+You can click on the ▷ symbol to move the current text to the new tag input. You can press enter or simply move another tag to add automatically the first one.
 
 ## Stuff left to do :
 - Ability to edit the translation rules in plain text from the option page of the extension
