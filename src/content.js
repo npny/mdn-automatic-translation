@@ -10,55 +10,56 @@ function start() {
 	locale = document.querySelector("[name=tolocale]").value;
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
-	addButton();
-
-	addTagsButton();
+	addTranslateButton();
+	addTagsArrows();
 }
 
-// Add button to quickly move the tags
-function addTagsButton(){
-	// Query the tags list and the new tag's input
-	var existingTags = document.querySelectorAll('#translate-tags li');
-	var newTagInput = document.querySelector('li.tagit-new input');
 
-	Array.prototype.forEach.call(existingTags, (tag) => {
-
-		// Create a new link for each existing tag
-		// Clicking on the link will update the input field with the curent value
-		((tagElement) => {
-
-			var arrowElement = document.createElement('a');
-			arrowElement.innerText = '▷';
-			arrowElement.href = '#';
-
-			arrowElement.addEventListener("click", (e) => {
-				e.preventDefault();
-
-				newTagInput.value = tag.querySelector('a').innerText;
-				newTagInput.focus(); // just press enter to validate
-			});
-
-			tagElement.appendChild(arrowElement);
-
-		})(tag)
-
-	});
-}
-
-function addButton() {
+function addTranslateButton() {
 
 	const button = document.createElement("button");
 	button.innerText = "Auto-translate";
-	button.addEventListener("click", (e) => e.preventDefault() + runTranslation());
+	button.addEventListener("click", (e) => {
+		e.preventDefault();
+		runTranslation();
+	});
 
 	document.querySelector(".editor-container").previousElementSibling.appendChild(button);
 
 }
 
 
+function addTagsArrows(){
+
+	const existingTags = document.querySelectorAll("#translate-tags li a");
+	const newTagInput = document.querySelector(".tagit-new input");
+
+	// We'll add a small transfer arrow on each tag element
+	Array.prototype.forEach.call(existingTags, (tag) => {
+
+		const arrow = document.createElement("a");
+		arrow.innerText = "▷";
+		arrow.href = "#";
+
+		// Clicking on this arrow will transfer the tag name to the new tag input and focus it, giving the user a chance to edit it before it is added
+		arrow.addEventListener("click", (e) => {
+			e.preventDefault();
+
+			newTagInput.blur();
+			newTagInput.value = tag.innerText;
+			newTagInput.focus();
+		});
+
+		tag.parentNode.appendChild(arrow);
+
+	});
+
+}
+
+
 function runTranslation() {
 
-	rules.forEach(function(rule) {
+	rules.forEach((rule) => {
 
 		// Check whether or not the rule should be applied
 		// indexOf==0 means that rule.domain is a substring of page.domain that starts at 0
@@ -78,7 +79,7 @@ function runTranslation() {
 		const pattern = regExpParts ? new RegExp(regExpParts[1], regExpParts[2]) : rule.pattern;
 
 		// And finally we apply the substitutions
-		Array.prototype.forEach.call(elements, function(element){
+		Array.prototype.forEach.call(elements, (element) => {
 			
 			element.innerHTML = element.innerHTML.replace(pattern, translation);
 
