@@ -98,5 +98,5 @@ function waitUntil(condition, interval, callback) {
 
 waitUntil(() =>
 	document.querySelector(".cke_wysiwyg_frame") &&
-	document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector("body"),
+	document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
 20, start);

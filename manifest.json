@@ -4,6 +4,11 @@
   "manifest_version": 2,
   "description": "Adds an \"Auto-translate\" button on the MDN docs translation page, that replaces common patterns (such as section titles) automatically.",
   "homepage_url": "https://github.com/npny",
+  "applications": {
+    "gecko": {
+      "id": "mdn-automatic-translation@npny.github.io"
+    }
+  },
   "icons": {
     "128": "icons/icon128.png"
   },

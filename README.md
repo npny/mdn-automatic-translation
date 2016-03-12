@@ -1,6 +1,6 @@
 # [MDN Automatic Translation](https://github.com/npny/mdn-automatic-translation)
 
-*A chrome extension for MDN contributors. Adds an "Auto-translate" button on the MDN docs edition page that automatically replaces common terms (such as section titles).*
+*A Chrome/FF extension for MDN contributors. Adds an "Auto-translate" button on the MDN docs edition page that automatically replaces common terms (such as section titles).*
 
 ## Why
 If you're an MDN contributor who focuses on translations, you have no doubt noticed that some patterns occur a lot (e.g. sections titles, terms in the compatibility table, etc.), and are translated the exact same way everytime.  
@@ -23,9 +23,9 @@ This is of course not intended as a replacement for human translation of large p
 ## Anyway
 
 #### 1. [Download the unpacked extension](https://github.com/npny/mdn-automatic-translation/archive/master.zip)
-#### 2. [Install the extension in Chrome](https://developer.chrome.com/extensions/getstarted#unpacked)
-#### 3. [Go ahead and start translating a page](https://developer.mozilla.org/en-US/docs/MDN/Doc_status)
-#### 4. Click here
+#### 2. Install the extension in [Chrome](https://developer.chrome.com/extensions/getstarted#unpacked) or [Firefox](https://www.youtube.com/watch?v=SKb-CNYpl6Q)
+#### 3. Go ahead and start [translating a page](https://developer.mozilla.org/en-US/docs/MDN/Doc_status)
+#### 4. Click this button
 ![](http://i.imgur.com/HxWIX8E.png)
 
 ...
@@ -79,7 +79,6 @@ You can click on the ▷ symbol to move the current text to the new tag input. Y
 ## Stuff left to do :
 - Ability to edit the translation rules in plain text from the option page of the extension
 - Add some more rules
-- Port to Firefox, ideally build both extensions from the same core javascript code
 - Ability to search other existing translations on MDN for similar terms. Makes it easier to learn how a particular expression is usually translated, or automate the translation of some paragraphs that are repeated throughout documents (like explanatory side notes or similar functions descriptions)
 
 Enjoy !  
