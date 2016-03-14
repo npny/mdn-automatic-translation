@@ -7,7 +7,13 @@ function start() {
 
 	rules = JSON.parse(window.localStorage["rules"]);
 	domain = window.location.pathname.substring(6); // Substring 6 turns (developer.mozilla.org)/en-US/docs/* into simply /docs/*, for scoping
-	locale = document.querySelector("[name=tolocale]").value;
+
+	// The local is either the hidden input in the for (for a new article), or the
+	// language selector
+	locale = document.querySelector("[name=tolocale]") ?
+		document.querySelector("[name=tolocale]").value :
+		document.querySelector("#language").value;
+
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
 	addTranslateButton();
@@ -46,7 +52,7 @@ function addEditOriginalButton(){
 function addTranslateButton() {
 
 	const button = document.createElement("button");
-	button.innerText = "Auto-translate";
+	button.innerText = "Auto-translate to " + locale;
 	button.addEventListener("click", (e) => {
 		e.preventDefault();
 		runTranslation();
@@ -57,7 +63,7 @@ function addTranslateButton() {
 }
 
 
-function addTagsArrows(){
+function addTagsArrows() {
 
 	const existingTags = document.querySelectorAll("#translate-tags li a");
 	const newTagInput = document.querySelector(".tagit-new input");
@@ -117,14 +123,32 @@ function runTranslation() {
 
 }
 
+// This is a setInterval() loop that checks periodically for a condition,
+// and runs a callback once the condition is true, if the page is not excluded.
+function waitUntil(condition, exclude, interval, callback) {
 
-// This is a setInterval() loop that checks periodically for a condition, and runs a callback once the condition is true.
-function waitUntil(condition, interval, callback) {
-	const intervalID = window.setInterval( () => condition() ? clearInterval(intervalID) + callback() : null, interval);
+	const intervalID = window.setInterval( () => {
+
+		const ready = condition();
+		const excluded = exclude();
+
+		if(ready) {
+			clearInterval(intervalID);
+
+			if(!excluded) {
+				callback();
+			}
+
+		}
+
+	}, interval);
 }
 
 
-waitUntil(() =>
-	document.querySelector(".cke_wysiwyg_frame") &&
-	document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
-20, start);
+waitUntil(
+		() => document.querySelector(".cke_wysiwyg_frame") &&
+					document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
+		() => document.querySelector("body.edit"),
+		1000,
+		start
+);
