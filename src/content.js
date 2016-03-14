@@ -7,7 +7,14 @@ function start() {
 
 	rules = JSON.parse(window.localStorage["rules"]);
 	domain = window.location.pathname.substring(6); // Substring 6 turns (developer.mozilla.org)/en-US/docs/* into simply /docs/*, for scoping
-	locale = document.querySelector("[name=tolocale]").value;
+
+	// The local is either the hidden input in the for (for a new article), or the
+	// language selector
+	locale = document.querySelector("[name=tolocale]") ?
+		document.querySelector("[name=tolocale]").value :
+		document.querySelector("#language").value;
+
+	console.log(locale);
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
 	addTranslateButton();
@@ -18,7 +25,7 @@ function start() {
 function addTranslateButton() {
 
 	const button = document.createElement("button");
-	button.innerText = "Auto-translate";
+	button.innerText = "Auto-translate to " + locale;
 	button.addEventListener("click", (e) => {
 		e.preventDefault();
 		runTranslation();
@@ -73,14 +80,14 @@ function runTranslation() {
 		// Check that we have a translation. No point in matching a pattern if we're not able to translate it in the end
 		const translation = rule.translation[locale];
 		if(!translation) return;
-		
+
 		// If the pattern string looks like "/expr/flags" we interpret it as a regular expression, otherwise as a regular string to be matched
 		const regExpParts = rule.pattern.match(new RegExp('^/(.*?)/([gimy]*)$'));
 		const pattern = regExpParts ? new RegExp(regExpParts[1], regExpParts[2]) : rule.pattern;
 
 		// And finally we apply the substitutions
 		Array.prototype.forEach.call(elements, (element) => {
-			
+
 			element.innerHTML = element.innerHTML.replace(pattern, translation);
 
 		});
@@ -89,14 +96,32 @@ function runTranslation() {
 
 }
 
+// This is a setInterval() loop that checks periodically for a condition,
+// and runs a callback once the condition is true, if the page is not excluded.
+function waitUntil(condition, exclude, interval, callback) {
 
-// This is a setInterval() loop that checks periodically for a condition, and runs a callback once the condition is true.
-function waitUntil(condition, interval, callback) {
-	const intervalID = window.setInterval( () => condition() ? clearInterval(intervalID) + callback() : null, interval);
+	const intervalID = window.setInterval( () => {
+
+		var ready = condition();
+		var excluded = exclude();
+
+		if(ready){
+			clearInterval(intervalID);
+
+			if (!excluded){
+				callback();
+			}
+
+		}
+
+	}, interval);
 }
 
 
-waitUntil(() =>
-	document.querySelector(".cke_wysiwyg_frame") &&
-	document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
-20, start);
+waitUntil(
+		() => document.querySelector(".cke_wysiwyg_frame") &&
+					document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
+		() => document.querySelector("body.edit"),
+		1000,
+		start
+);
