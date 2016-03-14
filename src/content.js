@@ -35,7 +35,7 @@ function addTranslateButton() {
 }
 
 
-function addTagsArrows(){
+function addTagsArrows() {
 
 	const existingTags = document.querySelectorAll("#translate-tags li a");
 	const newTagInput = document.querySelector(".tagit-new input");
@@ -101,13 +101,13 @@ function waitUntil(condition, exclude, interval, callback) {
 
 	const intervalID = window.setInterval( () => {
 
-		var ready = condition();
-		var excluded = exclude();
+		const ready = condition();
+		const excluded = exclude();
 
-		if(ready){
+		if(ready) {
 			clearInterval(intervalID);
 
-			if (!excluded){
+			if(!excluded) {
 				callback();
 			}
 
