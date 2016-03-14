@@ -11,9 +11,32 @@ function start() {
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
 	addTranslateButton();
+	addEditOriginalButton();
 	addTagsArrows();
 }
 
+function addEditOriginalButton(){
+	// Original url
+	const currentUrl = document.location.href;
+	var redirectUrl;
+
+	if(currentUrl.split('/')[3] == 'en-US'){
+		// keep the same url, change the translate & following to edit
+		redirectUrl = currentUrl.split('$')[0] + '$edit';
+	} else {
+		redirectUrl = currentUrl;
+	}
+
+	// Fetch the original article url and add a button to quickly go there
+	const button = document.createElement("button");
+	button.innerText = "Edit original";
+	button.addEventListener("click", (e) => {
+		e.preventDefault();
+		window.location.href = redirectUrl;
+	});
+
+	document.querySelector(".translate-buttons").appendChild(button);
+}
 
 function addTranslateButton() {
 
@@ -73,14 +96,14 @@ function runTranslation() {
 		// Check that we have a translation. No point in matching a pattern if we're not able to translate it in the end
 		const translation = rule.translation[locale];
 		if(!translation) return;
-		
+
 		// If the pattern string looks like "/expr/flags" we interpret it as a regular expression, otherwise as a regular string to be matched
 		const regExpParts = rule.pattern.match(new RegExp('^/(.*?)/([gimy]*)$'));
 		const pattern = regExpParts ? new RegExp(regExpParts[1], regExpParts[2]) : rule.pattern;
 
 		// And finally we apply the substitutions
 		Array.prototype.forEach.call(elements, (element) => {
-			
+
 			element.innerHTML = element.innerHTML.replace(pattern, translation);
 
 		});
