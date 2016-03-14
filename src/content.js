@@ -14,7 +14,6 @@ function start() {
 		document.querySelector("[name=tolocale]").value :
 		document.querySelector("#language").value;
 
-	console.log(locale);
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
 	addTranslateButton();
