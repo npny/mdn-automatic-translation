@@ -20,11 +20,16 @@ function addEditOriginalButton(){
 	const currentUrl = document.location.href;
 	var redirectUrl;
 
+	// Editing a new translated document, after clicking on "add a tranlation",
+	// the url will reference the en-US page
 	if(currentUrl.split('/')[3] == 'en-US'){
-		// keep the same url, change the translate & following to edit
+		// change the translate & following by edit
 		redirectUrl = currentUrl.split('$')[0] + '$edit';
-	} else {
-		redirectUrl = currentUrl;
+	}
+	// Editing an existing article along with the original one
+ 	else {
+		// change the local by en-US
+		redirectUrl = currentUrl.replace(locale, 'en-US');
 	}
 
 	// Fetch the original article url and add a button to quickly go there
