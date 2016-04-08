@@ -35,7 +35,7 @@ var defaultRules =
 	"selector": "h2",
 	"pattern": "Browser compatibility",
 	"translation": {
-		"fr": "Compatibilités des navigateurs",
+		"fr": "Compatibilité des navigateurs",
 		"de": "Browser Kompatibilität"
 	}
 },
@@ -51,7 +51,7 @@ var defaultRules =
 	"selector": "h3",
 	"pattern": "Returns",
 	"translation": {
-		"fr": "Retour"
+		"fr": "Valeur de retour"
 	}
 },
 {
@@ -73,7 +73,7 @@ var defaultRules =
 	"selector": ".compat-table td",
 	"pattern": "Basic support",
 	"translation": {
-		"fr": "Support de base",
+		"fr": "Support simple",
 		"de": "Basisunterstützung"
 	}
 },
@@ -89,14 +89,14 @@ var defaultRules =
 	"selector": ".standard-table th",
 	"pattern": "Status",
 	"translation": {
-		"fr": "Statut"
+		"fr": "État"
 	}
 },
 {
 	"selector": ".standard-table th",
 	"pattern": "Comment",
 	"translation": {
-		"fr": "Commentaire",
+		"fr": "Commentaires",
 		"de": "Kommentar"
 	}
 },
@@ -104,7 +104,7 @@ var defaultRules =
 	"selector": ".standard-table td",
 	"pattern": "Initial definition",
 	"translation": {
-		"fr": "Définition initiale",
+		"fr": "Définition initiale.",
 		"de": "Ursprüngliche Definition"
 	}
 }
