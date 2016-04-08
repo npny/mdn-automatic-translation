@@ -20,7 +20,7 @@ var defaultRules =
 	"pattern": "Examples",
 	"translation": {
 		"fr": "Exemples",
-		"de": "Beispiel"
+		"de": "Beispiele"
 	}
 },
 {
@@ -51,7 +51,8 @@ var defaultRules =
 	"selector": "h3",
 	"pattern": "Returns",
 	"translation": {
-		"fr": "Valeur de retour"
+		"fr": "Valeur de retour",
+		"de": "Rückgabewert"
 	}
 },
 {
@@ -66,7 +67,8 @@ var defaultRules =
 	"selector": ".compat-table th",
 	"pattern": "Feature",
 	"translation": {
-		"fr": "Fonctionnalité"
+		"fr": "Fonctionnalité",
+		"de": "Merkmal"
 	}
 },
 {
@@ -74,7 +76,7 @@ var defaultRules =
 	"pattern": "Basic support",
 	"translation": {
 		"fr": "Support simple",
-		"de": "Basisunterstützung"
+		"de": "Grundlegende Unterstützung"
 	}
 },
 {
