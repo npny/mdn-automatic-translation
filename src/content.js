@@ -3,9 +3,9 @@ var rules, domain, locale, root;
 
 function start() {
 
-	if(!window.localStorage["rules"]) window.localStorage["rules"] = JSON.stringify(defaultRules);
+	window.forkRulesLocally = () => window.localStorage["rules"] = JSON.stringify(defaultRules);
 
-	rules = JSON.parse(window.localStorage["rules"]);
+	rules = window.localStorage["rules"] ? JSON.parse(window.localStorage["rules"]) : defaultRules;
 	domain = window.location.pathname.substring(6); // Substring 6 turns (developer.mozilla.org)/en-US/docs/* into simply /docs/*, for scoping
 
 	// The locale can be determined from either a hidden input on the page or from the language selector
