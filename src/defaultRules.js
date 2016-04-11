@@ -17,6 +17,13 @@ var defaultRules =
 },
 {
 	"selector": "h2",
+	"pattern": "Properties",
+	"translation": {
+		"fr": "Propriétés"
+	}
+},
+{
+	"selector": "h2",
 	"pattern": "Methods",
 	"translation": {
 		"fr": "Méthodes",
