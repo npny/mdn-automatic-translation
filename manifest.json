@@ -1,7 +1,7 @@
 {
 	"name": "MDN Automatic Translation",
-	"version": "0.0.1",
-	"manifest_version": 2,
+	"version": "0.2.0",
+	"manifest_version": 3,
 	"description": "Adds an \"Auto-translate\" button on the MDN docs translation page, that replaces common patterns (such as section titles) automatically.",
 	"homepage_url": "https://github.com/npny/mdn-automatic-translation",
 	"applications": {

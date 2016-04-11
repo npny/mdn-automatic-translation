@@ -8,11 +8,10 @@ function start() {
 	rules = JSON.parse(window.localStorage["rules"]);
 	domain = window.location.pathname.substring(6); // Substring 6 turns (developer.mozilla.org)/en-US/docs/* into simply /docs/*, for scoping
 
-	// The local is either the hidden input in the for (for a new article), or the
-	// language selector
+	// The locale can be determined from either a hidden input on the page or from the language selector
 	locale = document.querySelector("[name=tolocale]") ?
-		document.querySelector("[name=tolocale]").value :
-		document.querySelector("#language").value;
+	         document.querySelector("[name=tolocale]").value :
+	         document.querySelector("#language").value;
 
 	root = document.querySelector(".cke_wysiwyg_frame").contentWindow.document;
 
@@ -21,33 +20,29 @@ function start() {
 	addTagsArrows();
 }
 
+
 function addEditOriginalButton(){
-	// Original url
-	const currentUrl = document.location.href;
-	var redirectUrl;
 
-	// Editing a new translated document, after clicking on "add a tranlation",
-	// the url will reference the en-US page
-	if(currentUrl.split('/')[3] == 'en-US'){
-		// change the translate & following by edit
-		redirectUrl = currentUrl.split('$')[0] + '$edit';
-	}
-	// Editing an existing article along with the original one
- 	else {
-		// change the local by en-US
-		redirectUrl = currentUrl.replace(locale, 'en-US');
-	}
+	// Coming from either :
+	//  /en-US/    ... $translate?tolocale=<locale>
+	//  /<locale>/ ... $edit
+	//
+	// We want to end up with :
+	//  /en-US/    ... $edit
 
-	// Fetch the original article url and add a button to quickly go there
-	const button = document.createElement("button");
+	const components = document.location.href.replace(/\$translate.*/, "$edit").split("/");
+	components[3] = "en-US";
+	const href = components.join("/");
+
+	const button = document.createElement("a");
+	button.className = "button";
 	button.innerText = "Edit original";
-	button.addEventListener("click", (e) => {
-		e.preventDefault();
-		window.location.href = redirectUrl;
-	});
+	button.href = href;
 
 	document.querySelector(".translate-buttons").appendChild(button);
+
 }
+
 
 function addTranslateButton() {
 
@@ -123,6 +118,7 @@ function runTranslation() {
 
 }
 
+
 // This is a setInterval() loop that checks periodically for a condition,
 // and runs a callback once the condition is true, if the page is not excluded.
 function waitUntil(condition, exclude, interval, callback) {
@@ -146,8 +142,10 @@ function waitUntil(condition, exclude, interval, callback) {
 
 
 waitUntil(
-		() => document.querySelector(".cke_wysiwyg_frame") &&
-					document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable"),
+		() =>
+			document.querySelector(".cke_wysiwyg_frame") &&
+			document.querySelector(".cke_wysiwyg_frame").contentWindow.document.querySelector(".cke_editable")
+		,
 		() => document.querySelector("body.edit"),
 		1000,
 		start
