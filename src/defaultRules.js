@@ -2,6 +2,14 @@ var defaultRules =
 [
 {
 	"selector": "h2",
+	"pattern": "Summary",
+	"translation": {
+		"fr": "Résumé",
+		"de": "Übersicht"
+	}
+},
+{
+	"selector": "h2",
 	"pattern": "Syntax",
 	"translation": {
 		"fr": "Syntaxe",
@@ -17,6 +25,22 @@ var defaultRules =
 },
 {
 	"selector": "h2",
+	"pattern": "Values",
+	"translation": {
+		"fr": "Valeurs",
+		"de": "Werte"
+	}
+},
+{
+	"selector": "h2",
+	"pattern": "Formal syntax",
+	"translation": {
+		"fr": "Syntaxe formelle",
+		"de": "Formale Syntax"
+	}
+},
+{
+	"selector": "h2",
 	"pattern": "Examples",
 	"translation": {
 		"fr": "Exemples",
@@ -25,10 +49,26 @@ var defaultRules =
 },
 {
 	"selector": "h2",
+	"pattern": "Example",
+	"translation": {
+		"fr": "Exemple",
+		"de": "Beispiel"
+	}
+},
+{
+	"selector": "h2",
 	"pattern": "Specifications",
 	"translation": {
 		"fr": "Spécifications",
 		"de": "Spezifikationen",
+	}
+},
+{
+	"selector": "h2",
+	"pattern": "Specification",
+	"translation": {
+		"fr": "Spécification",
+		"de": "Spezifikation",
 	}
 },
 {
