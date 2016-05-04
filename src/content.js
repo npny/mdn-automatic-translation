@@ -60,6 +60,7 @@ function addTranslateButton() {
 
 function addTagsArrows() {
 
+	const tagsContainer = document.querySelector(".page-tags h3");
 	const existingTags = document.querySelectorAll("#translate-tags li a");
 	const newTagInput = document.querySelector(".tagit-new input");
 
@@ -82,6 +83,22 @@ function addTagsArrows() {
 		tag.parentNode.appendChild(arrow);
 
 	});
+
+	// Add a button to add all tags
+	const addAll = document.createElement("a");
+	addAll.innerText = " - Move all ▷";
+	addAll.href = "#";
+
+	addAll.addEventListener("click", (e) => {
+			e.preventDefault();
+
+			Array.prototype.forEach.call(existingTags, (tag) => {
+				newTagInput.blur();
+				newTagInput.value = tag.innerText;
+				newTagInput.focus();
+			});
+	});
+	tagsContainer.appendChild(addAll);
 
 }
 
