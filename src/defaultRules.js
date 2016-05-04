@@ -156,5 +156,19 @@ var defaultRules =
 		"fr": "Définition initiale.",
 		"de": "Ursprüngliche Definition"
 	}
+},
+{
+	"selector": "p em",
+	"pattern": "inherits methods from its parent interface",
+	"translation": {
+		"fr": "hérite certaines méthodes de son parent",
+	}
+},
+{
+	"selector": "p em",
+	"pattern": "inherits properties from its parent interface",
+	"translation": {
+		"fr": "hérite certaines propriétés de son parent",
+	}
 }
 ]
